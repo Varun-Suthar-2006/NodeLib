@@ -153,8 +153,9 @@
   }
   
   .cover {
-    height: 140px; border-radius: var(--radius-md); display: flex; align-items: center; justify-content: center;
+    aspect-ratio: 8.5 / 11; height: auto; border-radius: var(--radius-md); display: flex; align-items: center; justify-content: center;
     font-weight: 800; font-size: 32px; color: #fff; letter-spacing: -0.02em; transition: opacity 0.2s ease;
+    position: relative; overflow: hidden;
   }
   .card:hover .cover { opacity: 0.9; }
 
@@ -191,7 +192,7 @@
   .close-x { background: none; border: none; font-size: 20px; color: var(--text-muted); cursor: pointer; }
 
   /* Book Detail Modal */
-  .detail-cover { height: 180px; border-radius: var(--radius-md); display: flex; align-items: center; justify-content: center; font-size: 48px; color: #fff; font-weight: 800; margin-bottom: 20px; }
+  .detail-cover { aspect-ratio: 8.5 / 11; height: auto; border-radius: var(--radius-md); display: flex; align-items: center; justify-content: center; font-size: 48px; color: #fff; font-weight: 800; margin-bottom: 20px; }
   .detail-meta { font-family: var(--font-mono); font-size: 13px; color: var(--text-muted); margin-bottom: 12px; }
   .detail-desc { font-size: 15px; line-height: 1.6; color: var(--text-main); margin-bottom: 24px; }
 
@@ -240,7 +241,7 @@
   .cart-head { padding: 24px; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
   .cart-items { flex-grow: 1; overflow-y: auto; padding: 20px 24px; }
   .cart-item { display: flex; gap: 14px; padding: 14px 0; border-bottom: 1px solid var(--border); }
-  .cart-item .ci-cover { width: 48px; height: 60px; border-radius: 6px; display: flex; align-items: center; justify-content: center; color: #fff; font-weight: 800; }
+  .cart-item .ci-cover { width: 48px; aspect-ratio: 8.5 / 11; height: auto; border-radius: 6px; display: flex; align-items: center; justify-content: center; color: #fff; font-weight: 800; position: relative; overflow: hidden; }
   .cart-foot { padding: 24px; border-top: 1px solid var(--border); background: var(--bg); }
   .cart-total { display: flex; justify-content: space-between; font-weight: 800; font-size: 18px; margin-bottom: 16px; }
 
@@ -284,7 +285,7 @@ header{background:rgba(255,255,255,.86);box-shadow:0 4px 20px rgba(16,24,40,.04)
 .btn-primary{background:linear-gradient(135deg,#6566f4,#4f46e5);box-shadow:0 10px 24px rgba(79,70,229,.20);}
 .card{border-radius:20px;padding:22px;box-shadow:0 8px 30px rgba(16,24,40,.045);}
 .card:hover{transform:translateY(-6px);box-shadow:0 18px 40px rgba(16,24,40,.10);}
-.cover{height:170px;border-radius:15px;box-shadow:inset 0 1px 0 rgba(255,255,255,.22);}
+.cover{border-radius:15px;box-shadow:inset 0 1px 0 rgba(255,255,255,.22);}
 .hero{padding:92px 0 70px;background:radial-gradient(circle at 80% 20%,#eef0ff 0,transparent 34%),linear-gradient(180deg,#fff,#f7f8fc);}
 .hero h1{font-size:58px;letter-spacing:-.045em;}
 .drawer-card{border-radius:22px;padding:30px;box-shadow:0 20px 50px rgba(16,24,40,.08);}
@@ -293,10 +294,10 @@ header{background:rgba(255,255,255,.86);box-shadow:0 4px 20px rgba(16,24,40,.04)
 .product-detail-page{display:none;padding:55px 0 80px;}
 .product-detail-shell{display:grid;grid-template-columns: minmax(300px,.8fr) 1.2fr;gap:48px;align-items:start;}
 .product-visual{background:#fff;border:1px solid var(--border);border-radius:24px;padding:22px;position:sticky;top:100px;box-shadow:0 15px 45px rgba(16,24,40,.07);}
-.product-visual-cover{height:440px;border-radius:20px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:78px;font-weight:800;box-shadow:inset 0 1px 0 rgba(255,255,255,.25);}
+.product-visual-cover{aspect-ratio:8.5/11;height:auto;max-height:520px;border-radius:20px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:78px;font-weight:800;box-shadow:inset 0 1px 0 rgba(255,255,255,.25);position:relative;overflow:hidden;}
 .detail-content h1{font-size:46px;line-height:1.1;letter-spacing:-.04em;margin:10px 0 12px;}
 .detail-author{font-family:var(--font-mono);color:var(--text-muted);font-size:14px;margin-bottom:22px;}
-.detail-description{font-size:17px;line-height:1.8;color:#475467;margin:25px 0;}
+.detail-description{font-size:17px;line-height:1.8;color:#475467;margin:25px 0;white-space:pre-line;}
 .detail-price{font-family:var(--font-mono);font-size:32px;font-weight:800;margin:22px 0;}
 .detail-actions{display:flex;gap:12px;flex-wrap:wrap;margin:25px 0 35px;}
 .feature-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:20px;}
@@ -309,10 +310,10 @@ header{background:rgba(255,255,255,.86);box-shadow:0 4px 20px rgba(16,24,40,.04)
 .secure-note{font-size:12px;color:var(--text-muted);text-align:center;margin-top:12px;}
 .profile-pill{background:#f2f4f7;border:1px solid var(--border);padding:7px 11px;border-radius:999px;font-size:12px;font-weight:700;color:#475467;}
 @media(max-width:800px){
- .product-detail-shell{grid-template-columns:1fr}.product-visual{position:static}.product-visual-cover{height:300px}.detail-content h1{font-size:36px}.hero h1{font-size:43px}.feature-grid{grid-template-columns:1fr}.payment-options{grid-template-columns:1fr 1fr}
+ .product-detail-shell{grid-template-columns:1fr}.product-visual{position:static}.product-visual-cover{max-height:380px}.detail-content h1{font-size:36px}.hero h1{font-size:43px}.feature-grid{grid-template-columns:1fr}.payment-options{grid-template-columns:1fr 1fr}
 }
 @media(max-width:520px){
- .wrap{padding:0 18px}.header-actions .user-chip{display:none}.product-visual-cover{height:250px}.payment-options{grid-template-columns:1fr}
+ .wrap{padding:0 18px}.header-actions .user-chip{display:none}.product-visual-cover{max-height:320px}.payment-options{grid-template-columns:1fr}
 }
 
 
@@ -687,6 +688,7 @@ header.scrolled {
         <div class="detail-actions">
           <button class="btn btn-primary" id="detailBuyBtn">Buy now →</button>
           <button class="btn btn-ghost" id="detailCartBtn">Add to cart</button>
+          <button class="btn btn-primary" id="detailReadBtn" style="display:none;">Read now →</button>
         </div>
         <div class="feature-grid">
           <div class="feature"><strong>Instant access</strong><span>Unlock in your library after successful payment.</span></div>
@@ -826,6 +828,17 @@ header.scrolled {
 
 <div class="toast" id="toast"></div>
 
+<!-- READER MODAL -->
+<div class="overlay" id="readerOverlay">
+  <div class="modal wide" style="max-width:920px; width:94vw; height:88vh; display:flex; flex-direction:column; padding:24px;">
+    <div class="modal-head" style="margin-bottom:14px;">
+      <h3 id="readerTitle">Reading</h3>
+      <button class="close-x" onclick="closeReader()">✕</button>
+    </div>
+    <div id="readerBody" style="flex:1; min-height:0; display:flex; flex-direction:column;"></div>
+  </div>
+</div>
+
 <!-- ADMIN ADD/EDIT BOOK MODAL -->
 <div class="overlay" id="adminFormOverlay">
   <div class="modal wide">
@@ -834,26 +847,49 @@ header.scrolled {
       <button class="close-x" onclick="closeModal('adminFormOverlay')">✕</button>
     </div>
     <label for="adminTitle">Title</label>
-    <input type="text" id="adminTitle" placeholder="The Concurrency Notebook">
+    <input type="text" id="adminTitle" placeholder="e.g., My Book Title">
     <label for="adminAuthor">Author</label>
-    <input type="text" id="adminAuthor" placeholder="R. Khatri">
+    <input type="text" id="adminAuthor" placeholder="e.g., Your Name">
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;">
       <div>
         <label for="adminPrice">Price (USD)</label>
-        <input type="number" id="adminPrice" placeholder="24" min="0" step="1">
+        <input type="number" id="adminPrice" placeholder="e.g., 20" min="0" step="1">
       </div>
       <div>
-        <label for="adminNo">Catalog no.</label>
-        <input type="text" id="adminNo" placeholder="005.1 ABC">
+        <label for="adminNo">Catalog no. <span style="color:var(--text-muted); font-weight:500;">(optional)</span></label>
+        <input type="text" id="adminNo" placeholder="e.g., 000.0 ABC">
       </div>
     </div>
     <label for="adminTags">Tags (comma-separated)</label>
-    <input type="text" id="adminTags" placeholder="typescript, types">
-    <label for="adminDesc">Description</label>
-    <textarea id="adminDesc" rows="3" placeholder="One or two sentences about the book."></textarea>
-    <label>Cover color</label>
+    <input type="text" id="adminTags" placeholder="e.g., fiction, self-help">
+    <label for="adminDesc">Short description <span style="color:var(--text-muted); font-weight:500;">(shown on the catalog page)</span></label>
+    <textarea id="adminDesc" rows="2" placeholder="One sentence that sums up the book — this is what shoppers see first."></textarea>
+    <label for="adminFullDesc">Full description <span style="color:var(--text-muted); font-weight:500;">(shown on the book's details page)</span></label>
+    <textarea id="adminFullDesc" rows="5" placeholder="The complete description readers see once they click into the book — as long as you like."></textarea>
+    <label>Cover color <span style="color:var(--text-muted); font-weight:500;">(used if no image is set)</span></label>
     <div id="adminColorSwatches" style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px;"></div>
     <input type="color" id="adminColor" value="#4F46E5" style="width:100%;height:44px;padding:4px;cursor:pointer;">
+
+    <label style="margin-top:20px;">Cover page <span style="color:var(--text-muted); font-weight:500;">(sized for a standard 8.5" × 11" cover)</span></label>
+    <div style="display:flex; gap:16px; align-items:flex-start;">
+      <div id="adminImagePreview" style="width:80px;aspect-ratio:8.5/11;height:auto;flex-shrink:0;border-radius:10px;background:#4F46E5;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;position:relative;overflow:hidden;border:1px solid var(--border);"></div>
+      <div style="flex:1;">
+        <input type="file" id="adminImageFile" accept="image/*" onchange="handleAdminImageUpload(event)" style="padding:8px 12px;">
+        <p style="font-size:11.5px;color:var(--text-muted);margin:8px 0;">...or paste an image URL:</p>
+        <input type="url" id="adminImageUrl" placeholder="https://example.com/cover.jpg" oninput="updateAdminImageFromUrl()">
+        <button type="button" class="btn btn-ghost" style="margin-top:8px; padding:8px 14px; font-size:12.5px;" onclick="clearAdminImage()">Remove image</button>
+        <p style="font-size:11px;color:var(--text-muted);margin-top:8px;line-height:1.5;">For the sharpest look, upload a cover image cropped to an 8.5:11 ratio (e.g., 850×1100px). Keep the file well under 1MB — it's stored inline with the catalog.</p>
+      </div>
+    </div>
+
+    <label style="margin-top:20px;">PDF link <span style="color:var(--text-muted); font-weight:500;">(what readers open when they click "Read now")</span></label>
+    <input type="url" id="adminPdfUrl" placeholder="https://example.com/book.pdf">
+    <p style="font-size:11.5px;color:var(--text-muted);margin-top:8px;line-height:1.5;">
+      This demo can't host large PDF files directly, so link to one instead — your own site,
+      or an embeddable link like a Google Drive "/preview" URL. Some hosts block embedding
+      entirely; readers always get an "open in new tab" option too.
+    </p>
+
     <button class="btn btn-primary" style="width:100%;margin-top:18px;" onclick="submitAdminForm()">Save book</button>
   </div>
 </div>
@@ -930,11 +966,18 @@ let activeFilter = 'all';
 let selectedPayment = 'razorpay';
 let adminUnlocked = false;
 let adminEditingId = null;
+let adminImageDataUrl = null;
 const ADMIN_PASSCODE = 'admin123';
 const ADMIN_SWATCHES = ['#4F46E5','#0EA5E9','#10B981','#8B5CF6','#F59E0B','#EC4899','#F97316','#14B8A6','#A855F7'];
 const STATE_KEY = 'nodelib-state';
 
 function initials(title){ return title.split(' ').map(w=>w[0]).join('').substring(0,2).toUpperCase(); }
+function escAttr(str){ return String(str).replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+function coverInnerHTML(b){
+  const fallback = `<span style="position:relative;z-index:1;">${initials(b.title)}</span>`;
+  if(!b.image) return fallback;
+  return fallback + `<img src="${escAttr(b.image)}" alt="${escAttr(b.title+' cover')}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;" onerror="this.remove()">`;
+}
 async function loadState(){
   try{
     const res = await window.storage.get(STATE_KEY, false);
@@ -967,17 +1010,24 @@ function setFilter(t){ activeFilter=t; renderFilters(); renderCatalog(); }
 function renderCatalog(){
   const grid=document.getElementById('catalogGrid');
   const books=activeFilter==='all'?BOOKS:BOOKS.filter(b=>b.tags.includes(activeFilter));
+  if(books.length===0){
+    grid.innerHTML=`<div class="drawer-card" style="grid-column:1/-1;text-align:center;padding:50px 20px;">
+      <h3>No books here yet</h3>
+      <p style="color:var(--text-muted);margin-top:8px;">${activeFilter==='all'?'Add your first book from the admin dashboard.':'No books match this filter yet.'}</p>
+    </div>`;
+    return;
+  }
   grid.innerHTML=books.map(b=>{
     const owned=library.includes(b.id), inCart=cart.includes(b.id);
     return `<div class="card" onclick="openProductPage('${b.id}')">
       <div class="card-top"><span class="catalog-no">NO. ${b.no}</span><span class="profile-pill">View →</span></div>
-      <div class="cover" style="background:${b.color}">${initials(b.title)}</div>
+      <div class="cover" style="background:${b.color}">${coverInnerHTML(b)}</div>
       <h3>${b.title}</h3><div class="author">by ${b.author}</div>
       <div class="desc">${b.desc}</div>
       <div class="tags">${b.tags.map(t=>`<span class="tag">${t}</span>`).join('')}</div>
       <div class="card-foot" onclick="event.stopPropagation()">
         <span class="price">$${b.price}</span>
-        ${owned?`<button class="add-btn owned">In Library ✓</button>`:
+        ${owned?`<button class="add-btn owned" onclick="openReader('${b.id}')">Read now ✓</button>`:
           `<button class="add-btn" onclick="addToCart('${b.id}')">${inCart?'In Cart':'Add to Cart'}</button>`}
       </div>
     </div>`;
@@ -988,17 +1038,24 @@ function openProductPage(id){
   document.getElementById('heroSection').style.display='none';
   document.getElementById('view-catalog').style.display='none';
   document.getElementById('productDetailPage').style.display='block';
-  document.getElementById('detailCover').style.background=b.color;
-  document.getElementById('detailCover').textContent=initials(b.title);
+  const cover=document.getElementById('detailCover');
+  cover.style.background=b.color;
+  cover.innerHTML=coverInnerHTML(b);
   document.getElementById('detailCatalogNo').textContent='NO. '+b.no;
   document.getElementById('detailPageTitle').textContent=b.title;
   document.getElementById('detailPageAuthor').textContent='BY '+b.author.toUpperCase();
   document.getElementById('detailPageTags').innerHTML=b.tags.map(t=>`<span class="tag">${t}</span>`).join('');
-  document.getElementById('detailPageDesc').textContent=b.desc;
+  document.getElementById('detailPageDesc').textContent=b.fullDesc || b.desc;
   document.getElementById('detailPagePrice').textContent='$'+b.price;
+  const owned=library.includes(b.id);
+  document.getElementById('detailBuyBtn').style.display=owned?'none':'';
+  document.getElementById('detailCartBtn').style.display=owned?'none':'';
   document.getElementById('detailCartBtn').textContent=cart.includes(b.id)?'Already in cart':'Add to cart';
   document.getElementById('detailCartBtn').onclick=()=>addToCart(b.id);
   document.getElementById('detailBuyBtn').onclick=()=>startSingleCheckout(b.id);
+  const readBtn=document.getElementById('detailReadBtn');
+  readBtn.style.display=owned?'':'none';
+  readBtn.onclick=()=>openReader(b.id);
   window.scrollTo({top:0,behavior:'smooth'});
 }
 function backToCatalog(){
@@ -1020,7 +1077,7 @@ function renderCart(){
   const cartBooks=cart.map(id=>BOOKS.find(b=>b.id===id)).filter(Boolean);
   items.innerHTML=cartBooks.length?cartBooks.map(b=>`
     <div class="cart-item">
-      <div class="ci-cover" style="background:${b.color}">${initials(b.title)}</div>
+      <div class="ci-cover" style="background:${b.color}">${coverInnerHTML(b)}</div>
       <div style="flex:1"><h4 style="font-size:14px;">${b.title}</h4>
       <div style="font-family:var(--font-mono);font-size:13px;font-weight:700;margin-top:4px;">$${b.price}</div></div>
       <button class="close-x" onclick="removeFromCart('${b.id}')">×</button>
@@ -1030,6 +1087,39 @@ function renderCart(){
 }
 function openCart(){document.getElementById('cartPanel').classList.add('show');}
 function closeCart(){document.getElementById('cartPanel').classList.remove('show');}
+
+function openReader(id){
+  if(!library.includes(id)){
+    showToast('Add this book to your library first to read it.');
+    return;
+  }
+  const b = BOOKS.find(x=>x.id===id);
+  if(!b) return;
+  document.getElementById('readerTitle').textContent = b.title;
+  const body = document.getElementById('readerBody');
+  if(b.pdfUrl){
+    body.innerHTML = `
+      <iframe src="${escAttr(b.pdfUrl)}" style="flex:1;width:100%;border:1px solid var(--border);border-radius:12px;min-height:0;" title="${escAttr(b.title)}"></iframe>
+      <p style="text-align:center;margin-top:12px;font-size:12.5px;color:var(--text-muted);">
+        Not loading? Some hosts block embedding.
+        <a href="${escAttr(b.pdfUrl)}" target="_blank" rel="noopener" style="color:var(--primary);font-weight:600;">Open the PDF in a new tab ↗</a>
+      </p>`;
+  } else {
+    body.innerHTML = `
+      <div style="flex:1;display:flex;align-items:center;justify-content:center;text-align:center;padding:40px;">
+        <div style="max-width:360px;">
+          <div style="width:56px;height:56px;border-radius:14px;background:${b.color};margin:0 auto 18px;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;">${initials(b.title)}</div>
+          <h3 style="margin-bottom:10px;">No file linked yet</h3>
+          <p style="color:var(--text-muted);font-size:14px;line-height:1.6;">The admin hasn't attached a readable PDF for this book yet. Check back soon, or reach out via the Contact page.</p>
+        </div>
+      </div>`;
+  }
+  document.getElementById('readerOverlay').classList.add('show');
+}
+function closeReader(){
+  closeModal('readerOverlay');
+  document.getElementById('readerBody').innerHTML = '';
+}
 
 function openAuthModal(){
   if(currentUser){
@@ -1106,6 +1196,9 @@ function payNow(){
   library=[...new Set([...library,...ids])];
   cart=cart.filter(id=>!ids.includes(id));
   saveState(); renderCart(); renderCatalog(); closeModal('checkoutOverlay'); closeCart();
+  if(ids.length===1 && document.getElementById('productDetailPage').style.display==='block'){
+    openProductPage(ids[0]);
+  }
   showToast(`Demo ${method} payment successful — $${total} paid.`);
 }
 function setView(view){
@@ -1122,10 +1215,14 @@ function renderLibrary(){
   const c=document.getElementById('libraryContent');
   const books=library.map(id=>BOOKS.find(b=>b.id===id)).filter(Boolean);
   c.innerHTML=books.length?`<div class="catalog-grid">${books.map(b=>`
-    <div class="card" onclick="openProductPage('${b.id}')">
-      <div class="cover" style="background:${b.color}">${initials(b.title)}</div>
-      <h3>${b.title}</h3><div class="author">by ${b.author}</div>
-      <div class="desc">${b.desc}</div><button class="btn btn-primary">Open details →</button>
+    <div class="card">
+      <div class="cover" style="background:${b.color}" onclick="openProductPage('${b.id}')">${coverInnerHTML(b)}</div>
+      <h3 onclick="openProductPage('${b.id}')" style="cursor:pointer;">${b.title}</h3><div class="author">by ${b.author}</div>
+      <div class="desc">${b.desc}</div>
+      <div style="display:flex; gap:10px;" onclick="event.stopPropagation()">
+        <button class="btn btn-primary" style="flex:1;" onclick="openReader('${b.id}')">Read now →</button>
+        <button class="btn btn-ghost" onclick="openProductPage('${b.id}')">Details</button>
+      </div>
     </div>`).join('')}</div>`:
     `<div class="drawer-card"><h3>Your library is empty</h3><p style="color:var(--text-muted);margin-top:8px;">Purchase an item to unlock it here.</p><button class="btn btn-primary" style="margin-top:18px;" onclick="setView('catalog')">Browse catalog</button></div>`;
 }
@@ -1160,7 +1257,7 @@ function renderAdmin(){
     return `<tr>
       <td>
         <div style="display:flex;align-items:center;gap:10px;">
-          <div style="width:36px;height:36px;flex-shrink:0;border-radius:9px;background:${b.color};display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:12px;">${initials(b.title)}</div>
+          <div style="width:36px;height:36px;flex-shrink:0;border-radius:9px;background:${b.color};display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:12px;position:relative;overflow:hidden;">${coverInnerHTML(b)}</div>
           <div>
             <div style="font-weight:700;font-size:13.5px;">${b.title}</div>
             <div style="font-family:var(--font-mono);font-size:11px;color:var(--text-muted);">${b.no||'—'}</div>
@@ -1180,7 +1277,8 @@ function renderAdmin(){
   el.innerHTML = `
     <div class="section-head">
       <h2>Admin dashboard</h2>
-      <div style="display:flex;gap:10px;">
+      <div style="display:flex;gap:10px;flex-wrap:wrap;">
+        <button class="btn btn-ghost" onclick="clearSeedBooks()">Clear sample books</button>
         <button class="btn btn-ghost" onclick="resetCatalogOverrides()">Reset to defaults</button>
         <button class="btn btn-primary" onclick="openAdminForm(null)">+ Add new book</button>
       </div>
@@ -1217,6 +1315,44 @@ function renderAdminSwatches(selected){
 function pickAdminColor(c){
   document.getElementById('adminColor').value = c;
   renderAdminSwatches(c);
+  renderAdminImagePreview();
+}
+function renderAdminImagePreview(){
+  const box = document.getElementById('adminImagePreview');
+  if(!box) return;
+  const color = document.getElementById('adminColor').value || ADMIN_SWATCHES[0];
+  box.style.background = color;
+  box.innerHTML = adminImageDataUrl
+    ? `<img src="${escAttr(adminImageDataUrl)}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;" onerror="this.remove()">`
+    : `<span style="position:relative;z-index:1;">IMG</span>`;
+}
+function handleAdminImageUpload(e){
+  const file = e.target.files && e.target.files[0];
+  if(!file) return;
+  if(file.size > 1.5 * 1024 * 1024){
+    showToast('That image is a bit large — try one under 1.5MB.');
+    e.target.value = '';
+    return;
+  }
+  const reader = new FileReader();
+  reader.onload = ()=>{
+    adminImageDataUrl = reader.result;
+    document.getElementById('adminImageUrl').value = '';
+    renderAdminImagePreview();
+  };
+  reader.readAsDataURL(file);
+}
+function updateAdminImageFromUrl(){
+  const url = document.getElementById('adminImageUrl').value.trim();
+  adminImageDataUrl = url || null;
+  if(url) document.getElementById('adminImageFile').value = '';
+  renderAdminImagePreview();
+}
+function clearAdminImage(){
+  adminImageDataUrl = null;
+  document.getElementById('adminImageUrl').value = '';
+  document.getElementById('adminImageFile').value = '';
+  renderAdminImagePreview();
 }
 function slugify(str){
   return str.toLowerCase().trim().replace(/[^a-z0-9]+/g,'-').replace(/(^-|-$)/g,'') || 'book';
@@ -1231,8 +1367,14 @@ function openAdminForm(id){
   document.getElementById('adminNo').value = b ? (b.no || '') : '';
   document.getElementById('adminTags').value = b ? b.tags.join(', ') : '';
   document.getElementById('adminDesc').value = b ? b.desc : '';
+  document.getElementById('adminFullDesc').value = b ? (b.fullDesc || '') : '';
   document.getElementById('adminColor').value = b ? b.color : ADMIN_SWATCHES[0];
+  document.getElementById('adminPdfUrl').value = b ? (b.pdfUrl || '') : '';
+  adminImageDataUrl = b ? (b.image || null) : null;
+  document.getElementById('adminImageFile').value = '';
+  document.getElementById('adminImageUrl').value = (b && b.image && b.image.startsWith('http')) ? b.image : '';
   renderAdminSwatches(b ? b.color : ADMIN_SWATCHES[0]);
+  renderAdminImagePreview();
   document.getElementById('adminFormOverlay').classList.add('show');
 }
 function submitAdminForm(){
@@ -1242,12 +1384,15 @@ function submitAdminForm(){
   const no = document.getElementById('adminNo').value.trim() || '000.0 NEW';
   const tags = document.getElementById('adminTags').value.split(',').map(t=>t.trim()).filter(Boolean);
   const desc = document.getElementById('adminDesc').value.trim();
+  const fullDesc = document.getElementById('adminFullDesc').value.trim() || null;
   const color = document.getElementById('adminColor').value;
+  const pdfUrl = document.getElementById('adminPdfUrl').value.trim() || null;
+  const image = adminImageDataUrl || null;
   if(!title || !author || isNaN(price) || price < 0 || tags.length === 0 || !desc){
     showToast('Fill in every field (including at least one tag) before saving.');
     return;
   }
-  const bookData = {title, author, price, no, tags, desc, color};
+  const bookData = {title, author, price, no, tags, desc, fullDesc, color, image, pdfUrl};
   if(adminEditingId){
     const isSeed = SEED_BOOKS.some(s=>s.id===adminEditingId);
     if(isSeed){
@@ -1280,6 +1425,15 @@ function deleteAdminBook(id){
   rebuildBooks();
   renderAdmin();
   showToast('Book removed from catalog.');
+}
+function clearSeedBooks(){
+  if(!confirm("Remove all sample books from the catalog, keeping only the ones you've added? This affects every visitor.")) return;
+  catalogOverrides.deletedIds = SEED_BOOKS.map(b=>b.id);
+  catalogOverrides.edits = {};
+  saveCatalogOverrides();
+  rebuildBooks();
+  renderAdmin();
+  showToast('Sample books removed. Your catalog now shows only your own books.');
 }
 function resetCatalogOverrides(){
   if(!confirm('Reset the catalog to the default nine books? This clears every admin change for all visitors.')) return;
