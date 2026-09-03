@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useApp } from '../context/AppContext';
 import { 
   Sparkles, HelpCircle, Mail, MessageSquare, 
-  Send, ShieldCheck, Github, Twitter, Linkedin, Heart, Shield 
+  Send, ShieldCheck, CheckCircle2, Github, Twitter, Linkedin, Heart, Shield, ExternalLink 
 } from 'lucide-react';
 
 export function AboutView() {
@@ -195,6 +195,21 @@ export function ContactView() {
               <strong>Location:</strong> Bengaluru / Global Remote
             </div>
           </div>
+
+          <div style={{ marginTop: '24px', paddingTop: '18px', borderTop: '1px solid var(--border)' }}>
+            <div style={{ fontSize: '12px', color: 'var(--text-muted)', marginBottom: '8px', fontWeight: 600 }}>
+              Corporate Parent &amp; Design Studio:
+            </div>
+            <a 
+              href="https://www.linkedin.com/company/lotus-lithium" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="btn btn-ghost btn-sm"
+              style={{ gap: '8px', color: '#0A66C2', borderColor: 'rgba(10, 102, 194, 0.3)', width: '100%', justifyContent: 'center' }}
+            >
+              <Linkedin size={15} /> Lotus &amp; Lithium on LinkedIn ↗
+            </a>
+          </div>
         </div>
       </div>
     </div>
@@ -205,38 +220,125 @@ export function Footer() {
   const { navigateTo } = useApp();
 
   return (
-    <footer>
-      <div className="wrap footer-inner">
-        <div>
-          <div className="brand" onClick={() => navigateTo('catalog')} style={{ marginBottom: '8px' }}>
-            <span className="brand-mark">005.1</span>
-            <div className="brand-text-group">
-              <span className="brand-name">Node<em>Lib</em></span>
-              <span className="brand-byline">by Lotus &amp; Lithium</span>
+    <footer className="site-footer">
+      <div className="wrap">
+        {/* Top Footer: Brand + Multi-Column Links */}
+        <div className="footer-top-grid">
+          
+          {/* Brand & Parent Company Bio */}
+          <div className="footer-brand-col">
+            <div className="brand" onClick={() => navigateTo('catalog')} style={{ marginBottom: '12px' }}>
+              <span className="brand-mark">005.1</span>
+              <div className="brand-text-group">
+                <span className="brand-name">Node<em>Lib</em></span>
+                <span className="brand-byline">by Lotus &amp; Lithium</span>
+              </div>
+            </div>
+            
+            <p style={{ fontSize: '13px', color: 'var(--text-muted)', lineHeight: 1.6, maxWidth: '320px', marginBottom: '16px' }}>
+              The definitive technical e-library & algorithmic bookstore built for software architects and systems engineers.
+            </p>
+
+            {/* Parent Organization Tag with LinkedIn Link */}
+            <a 
+              href="https://www.linkedin.com/company/lotus-lithium" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="lotus-parent-tag"
+              title="Visit Lotus & Lithium on LinkedIn"
+            >
+              <Linkedin size={14} style={{ color: '#0A66C2', flexShrink: 0 }} />
+              <span>A DIGITAL VENTURE BY <strong>LOTUS &amp; LITHIUM</strong></span>
+              <ExternalLink size={12} style={{ opacity: 0.6, flexShrink: 0 }} />
+            </a>
+          </div>
+
+          {/* Column 2: Discover */}
+          <div className="footer-links-col">
+            <h5 className="footer-col-title">Discover</h5>
+            <ul className="footer-nav-list">
+              <li><button onClick={() => navigateTo('catalog')}>Explore All Titles</button></li>
+              <li><button onClick={() => navigateTo('library')}>My Digital Shelf</button></li>
+              <li><button onClick={() => navigateTo('insights')}>Reading Analytics</button></li>
+              <li><button onClick={() => navigateTo('about')}>Dewey 005.1 Standard</button></li>
+            </ul>
+          </div>
+
+          {/* Column 3: Company */}
+          <div className="footer-links-col">
+            <h5 className="footer-col-title">Company</h5>
+            <ul className="footer-nav-list">
+              <li><button onClick={() => navigateTo('about')}>About NodeLib</button></li>
+              <li><button onClick={() => navigateTo('faq')}>Frequently Asked Questions</button></li>
+              <li><button onClick={() => navigateTo('contact')}>Editorial & Manuscripts</button></li>
+              <li><button onClick={() => navigateTo('contact')}>Developer Support</button></li>
+            </ul>
+          </div>
+
+          {/* Column 4: Trust & Infrastructure */}
+          <div className="footer-links-col">
+            <h5 className="footer-col-title">Enterprise</h5>
+            <div style={{ display: 'grid', gap: '8px', fontSize: '12.5px', color: 'var(--text-muted)' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                <ShieldCheck size={14} style={{ color: 'var(--emerald-text)' }} /> 256-Bit TLS Checkout
+              </div>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                <CheckCircle2 size={14} style={{ color: 'var(--emerald-text)' }} /> Supabase Cloud Verified
+              </div>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                <Sparkles size={14} style={{ color: 'var(--primary)' }} /> DRM-Free Ownership
+              </div>
+              <button 
+                onClick={() => navigateTo('admin')} 
+                style={{
+                  marginTop: '6px',
+                  color: 'var(--rose)',
+                  background: 'var(--rose-bg)',
+                  padding: '4px 10px',
+                  borderRadius: 'var(--radius-xs)',
+                  fontSize: '11.5px',
+                  fontWeight: 800,
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: '5px',
+                  width: 'fit-content'
+                }}
+                title="Restricted Staff Login"
+              >
+                <Shield size={12} /> Staff Management Portal
+              </button>
             </div>
           </div>
-          <p style={{ fontSize: '12.5px', color: 'var(--text-muted)', maxWidth: '340px' }}>
-            Smart digital bookstore & e-library engineered for modern developers.
-          </p>
         </div>
 
-        <div style={{ display: 'flex', gap: '24px', fontSize: '13px', fontWeight: 600, color: 'var(--text-secondary)', flexWrap: 'wrap' }}>
-          <button onClick={() => navigateTo('catalog')}>Explore</button>
-          <button onClick={() => navigateTo('library')}>My Library</button>
-          <button onClick={() => navigateTo('about')}>About Us</button>
-          <button onClick={() => navigateTo('faq')}>FAQ</button>
-          <button onClick={() => navigateTo('contact')}>Contact & Support</button>
-          <button 
-            onClick={() => navigateTo('admin')} 
-            style={{ color: 'var(--text-muted)', fontSize: '12px', opacity: 0.7 }}
-            title="Owner & Staff Login"
+        {/* Bottom Bar: Copyright & Professional Brand Seal */}
+        <div className="footer-bottom-bar">
+          <div style={{ fontSize: '12px', color: 'var(--text-muted)' }}>
+            © {new Date().getFullYear()} NodeLib Inc. An imprint of{' '}
+            <a 
+              href="https://www.linkedin.com/company/lotus-lithium" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              style={{ color: 'var(--text-primary)', fontWeight: 700, textDecoration: 'underline', textUnderlineOffset: '3px' }}
+            >
+              Lotus &amp; Lithium Technologies
+            </a>. All rights reserved.
+          </div>
+
+          {/* Professional Lotus & Lithium Brand Seal with LinkedIn Link */}
+          <a 
+            href="https://www.linkedin.com/company/lotus-lithium" 
+            target="_blank" 
+            rel="noopener noreferrer" 
+            className="lotus-brand-seal"
+            title="Connect with Lotus & Lithium on LinkedIn"
           >
-            Staff Portal
-          </button>
-        </div>
-
-        <div style={{ fontSize: '12px', color: 'var(--text-muted)' }}>
-          © 2026 NodeLib Inc. All Rights Reserved.
+            <Linkedin size={13} style={{ color: '#0A66C2', flexShrink: 0 }} />
+            <span className="seal-text">
+              DESIGNED &amp; ARCHITECTED BY <strong style={{ color: 'var(--text-primary)', fontWeight: 800 }}>LOTUS &amp; LITHIUM</strong>
+            </span>
+            <span className="seal-tag">CONNECT ↗</span>
+          </a>
         </div>
       </div>
     </footer>

@@ -1,6 +1,6 @@
 import React, { useState, useRef } from 'react';
 import { useApp } from '../context/AppContext';
-import { Heart, Star, BookOpen, Check, ShoppingBag } from 'lucide-react';
+import { Heart, Star, BookOpen, Check, ShoppingBag, Layers, Sparkles } from 'lucide-react';
 
 export default function BookCard({ book, index = 0 }) {
   const { 
@@ -145,11 +145,14 @@ export default function BookCard({ book, index = 0 }) {
       {/* Short Description */}
       <p className="book-card-desc">{book.desc}</p>
 
-      {/* Tags */}
-      <div className="tags-list">
-        {book.tags && book.tags.slice(0, 3).map(tag => (
-          <span key={tag} className="tag-pill">{tag}</span>
-        ))}
+      {/* Book Edition & Technical Specs Strip */}
+      <div className="book-card-specs">
+        <span className="spec-pill">
+          <Layers size={11} /> {book.category || 'Engineering'}
+        </span>
+        <span className="spec-pill">
+          <Sparkles size={11} /> DRM-Free Digital
+        </span>
       </div>
 
       {/* Footer: Price & Primary Action */}
@@ -163,30 +166,37 @@ export default function BookCard({ book, index = 0 }) {
 
         {isOwned ? (
           <button 
-            className="btn btn-primary btn-sm"
+            className="btn btn-primary btn-sm book-action-btn"
             style={{ background: 'var(--emerald)', boxShadow: 'none' }}
             onClick={() => openReader(book.id)}
           >
-            <BookOpen size={14} /> Read now ✓
+            <BookOpen size={13} />
+            <span className="card-btn-label-desktop">Read now ✓</span>
+            <span className="card-btn-label-mobile">Read</span>
           </button>
         ) : isOutOfStock ? (
-          <button className="btn btn-ghost btn-sm" disabled>
-            Out of stock
+          <button className="btn btn-ghost btn-sm book-action-btn" disabled>
+            <span className="card-btn-label-desktop">Out of stock</span>
+            <span className="card-btn-label-mobile">Sold Out</span>
           </button>
         ) : inCart ? (
           <button 
-            className="btn btn-ghost btn-sm"
+            className="btn btn-ghost btn-sm book-action-btn"
             style={{ borderColor: 'var(--primary)', color: 'var(--primary)' }}
             onClick={() => addToCart(book.id)}
           >
-            <Check size={14} /> In Cart
+            <Check size={13} />
+            <span className="card-btn-label-desktop">In Cart</span>
+            <span className="card-btn-label-mobile">Added</span>
           </button>
         ) : (
           <button 
-            className="btn btn-primary btn-sm"
+            className="btn btn-primary btn-sm book-action-btn"
             onClick={() => addToCart(book.id)}
           >
-            <ShoppingBag size={14} /> Add to Cart
+            <ShoppingBag size={13} />
+            <span className="card-btn-label-desktop">Add to Cart</span>
+            <span className="card-btn-label-mobile">Add</span>
           </button>
         )}
       </div>

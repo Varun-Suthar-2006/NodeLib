@@ -84,18 +84,38 @@ export default function Header() {
       <header className={isScrolled ? 'scrolled' : ''}>
         <div className="wrap header-inner">
           
-          {/* Left: Mobile Menu Trigger + Brand */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+          {/* Left: Mobile Menu Trigger + Brand Identity */}
+          <div style={{ display: 'flex', alignItems: 'center', gap: '8px', minWidth: 0, flex: 1 }}>
             <button
               className="btn-icon mobile-menu-btn"
               onClick={() => setIsMobileMenuOpen(prev => !prev)}
               aria-label="Toggle navigation menu"
               title="Menu"
+              style={{ position: 'relative', flexShrink: 0 }}
             >
-              {isMobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
+              {isMobileMenuOpen ? (
+                <X size={20} />
+              ) : currentUser ? (
+                <div style={{
+                  width: '26px',
+                  height: '26px',
+                  borderRadius: '50%',
+                  background: 'var(--primary)',
+                  color: '#FFFFFF',
+                  fontSize: '11px',
+                  fontWeight: 800,
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center'
+                }}>
+                  {getInitials(currentUser.name)}
+                </div>
+              ) : (
+                <Menu size={20} />
+              )}
             </button>
 
-            {/* Customer Store Brand */}
+            {/* Customer Store Brand (Always Clear & Prominent) */}
             <div className="brand" onClick={() => navigateTo('catalog')}>
               <div className="brand-mark">005.1</div>
               <div className="brand-text-group">
@@ -104,8 +124,6 @@ export default function Header() {
               </div>
             </div>
           </div>
-
-
 
           {/* Center: Desktop Navigation Bar */}
           <nav className="main-nav desktop-nav">
@@ -122,8 +140,6 @@ export default function Header() {
             >
               <BookOpen size={15} /> My Library
             </button>
-
-
 
             <button 
               className={`nav-link ${activeView === 'insights' ? 'active' : ''}`}
@@ -167,15 +183,20 @@ export default function Header() {
             
             {/* Mobile Search Toggle Button */}
             <button 
-              className="btn-icon mobile-search-trigger" 
+              className={`btn-icon mobile-search-trigger ${isMobileSearchOpen ? 'active' : ''}`} 
               onClick={() => setIsMobileSearchOpen(prev => !prev)}
               title="Search"
               aria-label="Toggle Search"
+              style={{
+                background: isMobileSearchOpen ? 'var(--primary-light)' : undefined,
+                color: isMobileSearchOpen ? 'var(--primary)' : undefined,
+                borderColor: isMobileSearchOpen ? 'var(--primary)' : undefined
+              }}
             >
               <Search size={17} />
             </button>
 
-            {/* Smart Finder Quiz Trigger */}
+            {/* Smart Finder Quiz Trigger (Desktop) */}
             <button 
               className="btn-icon desktop-finder-btn" 
               onClick={() => setIsFinderOpen(true)}
@@ -185,9 +206,9 @@ export default function Header() {
               <Compass size={17} />
             </button>
 
-            {/* Customer Wishlist */}
+            {/* Customer Wishlist (Desktop) */}
             <button 
-              className="btn-icon" 
+              className="btn-icon desktop-wishlist-btn" 
               onClick={() => setIsWishlistOpen(true)}
               title="Saved Wishlist"
               style={{ position: 'relative' }}
@@ -228,7 +249,7 @@ export default function Header() {
               )}
             </button>
 
-            {/* Dark / Light Mode Switch */}
+            {/* Dark / Light Mode Switch (Desktop) */}
             <button 
               className="btn-icon desktop-theme-btn" 
               onClick={toggleTheme}
@@ -238,8 +259,8 @@ export default function Header() {
               {theme === 'dark' ? <Sun size={17} /> : <Moon size={17} />}
             </button>
 
-            {/* Customer Account & Profile */}
-            <div className="profile-menu-wrap" ref={profileRef}>
+            {/* Customer Account & Profile (Desktop Only - on mobile it lives inside Hamburger Drawer) */}
+            <div className="profile-menu-wrap desktop-profile-wrap" ref={profileRef}>
               {currentUser ? (
                 <button 
                   className="btn btn-ghost btn-sm profile-pill-btn"
@@ -278,7 +299,7 @@ export default function Header() {
                 </button>
               )}
 
-              {/* Profile Dropdown */}
+              {/* Desktop Profile Dropdown */}
               {currentUser && isProfileOpen && (
                 <div className="profile-dropdown">
                   <div className="profile-dropdown-head">
@@ -308,8 +329,6 @@ export default function Header() {
                   >
                     <CheckCircle2 size={15} /> Order Invoices
                   </button>
-
-
 
                   {isAdmin && (
                     <>
@@ -344,9 +363,9 @@ export default function Header() {
           </div>
         </div>
 
-        {/* Mobile Search Overlay Bar */}
+        {/* Animated Mobile Search Bar Overlay */}
         {isMobileSearchOpen && (
-          <div className="mobile-search-bar-wrap animate-fade-in">
+          <div className="mobile-search-bar-wrap animate-search-slide-down">
             <div className="wrap" style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
               <div className="smart-search" style={{ flex: 1, maxWidth: '100%' }}>
                 <span className="smart-search-icon"><Search size={16} /></span>
@@ -357,7 +376,17 @@ export default function Header() {
                   value={searchQuery}
                   onChange={handleSearchChange}
                   onKeyDown={handleSearchKeyDown}
+                  autoComplete="off"
                 />
+                {searchQuery && (
+                  <button 
+                    type="button"
+                    onClick={() => setSearchQuery('')}
+                    style={{ color: 'var(--text-muted)', padding: '2px 4px', fontSize: '12px', fontWeight: 700 }}
+                  >
+                    ✕
+                  </button>
+                )}
               </div>
               <button 
                 className="btn-icon" 
@@ -375,6 +404,8 @@ export default function Header() {
       {isMobileMenuOpen && (
         <div className="mobile-drawer-backdrop animate-fade-in" onClick={() => setIsMobileMenuOpen(false)}>
           <div className="mobile-drawer-panel" onClick={(e) => e.stopPropagation()}>
+            
+            {/* Mobile Drawer Header */}
             <div className="mobile-drawer-header">
               <div className="brand" onClick={() => handleMobileNavClick('catalog')}>
                 <div className="brand-mark">005.1</div>
@@ -386,6 +417,71 @@ export default function Header() {
               <button className="modal-close-btn" onClick={() => setIsMobileMenuOpen(false)}>
                 <X size={18} />
               </button>
+            </div>
+
+            {/* Mobile User Profile Section (Top of Drawer) */}
+            <div style={{
+              padding: '16px 18px',
+              background: 'var(--surface-subtle)',
+              borderBottom: '1px solid var(--border)'
+            }}>
+              {currentUser ? (
+                <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+                  <div style={{
+                    width: '42px',
+                    height: '42px',
+                    borderRadius: '50%',
+                    background: 'var(--primary-gradient)',
+                    color: '#FFFFFF',
+                    fontSize: '15px',
+                    fontWeight: 800,
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    boxShadow: '0 4px 12px var(--primary-glow)',
+                    flexShrink: 0
+                  }}>
+                    {getInitials(currentUser.name)}
+                  </div>
+                  <div style={{ minWidth: 0, flex: 1 }}>
+                    <div style={{ fontWeight: 800, fontSize: '14.5px', color: 'var(--text-primary)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                      {currentUser.name}
+                    </div>
+                    <div style={{ fontSize: '11.5px', color: 'var(--text-muted)', fontFamily: 'var(--font-mono)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                      {currentUser.email}
+                    </div>
+                    <span style={{
+                      display: 'inline-block',
+                      fontSize: '9.5px',
+                      fontWeight: 800,
+                      padding: '1px 6px',
+                      borderRadius: '99px',
+                      background: 'var(--primary-light)',
+                      color: 'var(--primary)',
+                      marginTop: '3px'
+                    }}>
+                      {currentUser.role === 'admin' ? '🛡 Store Admin' : '✓ Active Member'}
+                    </span>
+                  </div>
+                </div>
+              ) : (
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                  <div style={{ fontSize: '12.5px', color: 'var(--text-secondary)' }}>
+                    Sign in to sync your library and purchases:
+                  </div>
+                  <button 
+                    className="btn btn-primary btn-sm"
+                    style={{ width: '100%', gap: '6px' }}
+                    onClick={() => {
+                      setAuthMode('signin');
+                      setIsAuthOpen(true);
+                      setIsMobileMenuOpen(false);
+                    }}
+                  >
+                    <LogIn size={14} /> Sign In / Register
+                  </button>
+                </div>
+              )}
             </div>
 
             {/* Mobile Nav Links */}
@@ -408,7 +504,15 @@ export default function Header() {
                 <ArrowRight size={15} />
               </button>
 
-
+              <button 
+                className={`mobile-drawer-link ${activeView === 'orders' ? 'active' : ''}`}
+                onClick={() => handleMobileNavClick('orders')}
+              >
+                <span style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                  <CheckCircle2 size={16} /> Order Invoices
+                </span>
+                <ArrowRight size={15} />
+              </button>
 
               <button 
                 className={`mobile-drawer-link ${activeView === 'insights' ? 'active' : ''}`}
@@ -458,9 +562,9 @@ export default function Header() {
               )}
             </div>
 
-            {/* Mobile Drawer Footer with Theme Toggle & User */}
+            {/* Mobile Drawer Footer with Theme Toggle & Sign Out */}
             <div className="mobile-drawer-footer">
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                 <span style={{ fontSize: '13px', fontWeight: 700, color: 'var(--text-secondary)' }}>
                   Appearance
                 </span>
@@ -474,32 +578,16 @@ export default function Header() {
                 </button>
               </div>
 
-              {currentUser ? (
-                <div style={{ background: 'var(--surface-subtle)', padding: '12px', borderRadius: 'var(--radius-md)', border: '1px solid var(--border)' }}>
-                  <div style={{ fontWeight: 800, fontSize: '14px' }}>{currentUser.name}</div>
-                  <div style={{ fontSize: '12px', color: 'var(--text-muted)', fontFamily: 'var(--font-mono)' }}>{currentUser.email}</div>
-                  <button 
-                    className="btn btn-ghost btn-sm"
-                    style={{ width: '100%', marginTop: '10px', color: 'var(--rose)' }}
-                    onClick={() => {
-                      logout();
-                      setIsMobileMenuOpen(false);
-                    }}
-                  >
-                    <LogOut size={14} /> Sign Out
-                  </button>
-                </div>
-              ) : (
+              {currentUser && (
                 <button 
-                  className="btn btn-primary"
-                  style={{ width: '100%' }}
+                  className="btn btn-ghost btn-sm"
+                  style={{ width: '100%', marginTop: '14px', color: 'var(--rose)', borderColor: 'rgba(244, 63, 94, 0.25)' }}
                   onClick={() => {
-                    setAuthMode('signin');
-                    setIsAuthOpen(true);
+                    logout();
                     setIsMobileMenuOpen(false);
                   }}
                 >
-                  <LogIn size={15} /> Sign In / Register
+                  <LogOut size={14} /> Sign Out
                 </button>
               )}
             </div>
