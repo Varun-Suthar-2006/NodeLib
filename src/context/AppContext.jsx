@@ -305,12 +305,7 @@ export function AppProvider({ children }) {
 
   // Checkout Flow
   const startCheckout = (itemIds) => {
-    if (!currentUser) {
-      setIsCartOpen(false);
-      setIsAuthOpen(true);
-      showToast('Please sign in or create an account to purchase.');
-      return;
-    }
+    if (!itemIds || itemIds.length === 0) return;
     setCheckoutItems(itemIds);
     setIsCartOpen(false);
     setIsCheckoutOpen(true);

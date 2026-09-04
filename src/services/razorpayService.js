@@ -88,11 +88,17 @@ export const isCustomRazorpayKeySet = () => {
  */
 export const getRazorpayKeyId = () => {
   const localKey = localStorage.getItem('nodelib_razorpay_key_id');
-  if (localKey && localKey.trim()) return localKey.trim();
+  const envKey = import.meta.env.VITE_RAZORPAY_KEY_ID?.trim();
   
-  if (import.meta.env.VITE_RAZORPAY_KEY_ID && import.meta.env.VITE_RAZORPAY_KEY_ID.trim()) {
-    return import.meta.env.VITE_RAZORPAY_KEY_ID.trim();
+  // If envKey is configured with a real key (starts with rzp_live_ or rzp_test_), and localKey is empty or an old default, use envKey
+  if (envKey && isValidRazorpayKey(envKey)) {
+    if (!localKey || localKey === 'rzp_test_1DP5mmOlF5G5ag') {
+      return envKey;
+    }
   }
+
+  if (localKey && localKey.trim()) return localKey.trim();
+  if (envKey) return envKey;
   
   // Default sample key for sandbox demo initialization
   return 'rzp_test_1DP5mmOlF5G5ag';
