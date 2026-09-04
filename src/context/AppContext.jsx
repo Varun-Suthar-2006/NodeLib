@@ -359,6 +359,7 @@ export function AppProvider({ children }) {
       userToCharge.email
     );
 
+    // Note: Do not force close checkout modal here so that CheckoutModal can show the confirmation screen and GST invoice button
     // Update activity purchases
     setActivity(prev => {
       const nextPurchases = { ...prev.purchases };
@@ -368,8 +369,6 @@ export function AppProvider({ children }) {
       return { ...prev, purchases: nextPurchases };
     });
 
-    setIsCheckoutOpen(false);
-    
     // Trigger celebration confetti
     try {
       confetti({
@@ -380,6 +379,7 @@ export function AppProvider({ children }) {
     } catch (e) {}
 
     showToast(`Payment successful! ₹${total} paid via ${gateway.toUpperCase()} (${generatedTxnRef}). Added to My Library.`, 'success');
+    return newOrder;
   };
 
   // Membership Activation
