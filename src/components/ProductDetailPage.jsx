@@ -45,10 +45,39 @@ export default function ProductDetailPage() {
           <div 
             className="detail-large-cover"
             style={{
-              background: `linear-gradient(145deg, ${book.color || '#4F46E5'} 0%, ${book.colorEnd || '#312E81'} 100%)`
+              background: (book.coverImage || book.imageUrl)
+                ? '#0F172A'
+                : `linear-gradient(145deg, ${book.color || '#4F46E5'} 0%, ${book.colorEnd || '#312E81'} 100%)`,
+              position: 'relative',
+              overflow: 'hidden'
             }}
           >
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+            {(book.coverImage || book.imageUrl) && (
+              <>
+                <img 
+                  src={book.coverImage || book.imageUrl} 
+                  alt={book.title} 
+                  style={{
+                    position: 'absolute',
+                    inset: 0,
+                    width: '100%',
+                    height: '100%',
+                    objectFit: 'cover',
+                    zIndex: 1
+                  }}
+                />
+                <div 
+                  style={{
+                    position: 'absolute',
+                    inset: 0,
+                    background: 'linear-gradient(to top, rgba(15,23,42,0.95) 0%, rgba(15,23,42,0.2) 50%, rgba(15,23,42,0.75) 100%)',
+                    zIndex: 2
+                  }}
+                />
+              </>
+            )}
+
+            <div style={{ position: 'relative', zIndex: 3, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
               <span style={{ fontFamily: 'var(--font-mono)', fontSize: '13px', fontWeight: 800 }}>
                 NO. {book.no || '005.1 NLB'}
               </span>
@@ -57,14 +86,16 @@ export default function ProductDetailPage() {
               </span>
             </div>
 
-            <div style={{ textAlign: 'center', margin: '40px 0' }}>
-              <div className="initials">{getInitials(book.title)}</div>
-              <div style={{ fontSize: '14px', fontWeight: 700, letterSpacing: '0.08em', marginTop: '10px', textTransform: 'uppercase' }}>
+            <div style={{ position: 'relative', zIndex: 3, textAlign: 'center', margin: '40px 0' }}>
+              {!(book.coverImage || book.imageUrl) && (
+                <div className="initials">{getInitials(book.title)}</div>
+              )}
+              <div style={{ fontSize: '14px', fontWeight: 700, letterSpacing: '0.08em', marginTop: '10px', textTransform: 'uppercase', textShadow: (book.coverImage || book.imageUrl) ? '0 2px 10px rgba(0,0,0,0.8)' : undefined }}>
                 {book.category || 'Software Engineering'}
               </div>
             </div>
 
-            <div style={{ display: 'flex', justifyContent: 'space-between', fontFamily: 'var(--font-mono)', fontSize: '12px' }}>
+            <div style={{ position: 'relative', zIndex: 3, display: 'flex', justifyContent: 'space-between', fontFamily: 'var(--font-mono)', fontSize: '12px' }}>
               <span>NODELIB PRESS</span>
               <span>VERIFIED MASTER</span>
             </div>

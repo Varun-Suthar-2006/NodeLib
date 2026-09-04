@@ -101,15 +101,53 @@ export default function BookCard({ book, index = 0 }) {
       <div 
         className="book-cover"
         style={{
-          background: `linear-gradient(145deg, ${book.color || '#4F46E5'} 0%, ${book.colorEnd || '#312E81'} 100%)`
+          background: (book.coverImage || book.imageUrl) 
+            ? '#0F172A' 
+            : `linear-gradient(145deg, ${book.color || '#4F46E5'} 0%, ${book.colorEnd || '#312E81'} 100%)`,
+          position: 'relative',
+          overflow: 'hidden'
         }}
       >
-        <div className="book-cover-no">NO. {book.no || '005.1 NLB'}</div>
-        <div className="book-cover-body">
-          <div className="book-cover-initials">{getInitials(book.title)}</div>
-          <div className="book-cover-sub">{book.category || 'Technology'}</div>
+        {(book.coverImage || book.imageUrl) && (
+          <>
+            <img 
+              src={book.coverImage || book.imageUrl} 
+              alt={book.title} 
+              className="book-cover-img"
+              style={{
+                position: 'absolute',
+                inset: 0,
+                width: '100%',
+                height: '100%',
+                objectFit: 'cover',
+                zIndex: 1,
+                transition: 'transform 0.4s ease'
+              }}
+            />
+            {/* Gradient Overlay for Text Legibility */}
+            <div 
+              style={{
+                position: 'absolute',
+                inset: 0,
+                background: 'linear-gradient(to top, rgba(15,23,42,0.92) 0%, rgba(15,23,42,0.2) 45%, rgba(15,23,42,0.7) 100%)',
+                zIndex: 2
+              }}
+            />
+          </>
+        )}
+
+        <div className="book-cover-no" style={{ position: 'relative', zIndex: 3 }}>
+          NO. {book.no || '005.1 NLB'}
         </div>
-        <div className="book-cover-foot">
+        <div className="book-cover-body" style={{ position: 'relative', zIndex: 3 }}>
+          {!(book.coverImage || book.imageUrl) && (
+            <div className="book-cover-initials">{getInitials(book.title)}</div>
+          )}
+          <div className="book-cover-sub" style={{ textShadow: (book.coverImage || book.imageUrl) ? '0 2px 8px rgba(0,0,0,0.8)' : undefined }}>
+            {book.category || 'Technology'}
+          </div>
+        </div>
+        <div className="book-cover-foot" style={{ position: 'relative', zIndex: 3 }}>
           <span>NODELIB</span>
           <span>DIGITAL ED.</span>
         </div>

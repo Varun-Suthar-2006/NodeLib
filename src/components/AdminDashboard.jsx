@@ -481,15 +481,26 @@ export default function AdminDashboard() {
                             width: '36px',
                             height: '46px',
                             borderRadius: '4px',
-                            background: `linear-gradient(135deg, ${book.color || '#4F46E5'}, ${book.colorEnd || '#312E81'})`,
+                            background: (book.coverImage || book.imageUrl) ? '#0F172A' : `linear-gradient(135deg, ${book.color || '#4F46E5'}, ${book.colorEnd || '#312E81'})`,
                             display: 'flex',
                             alignItems: 'center',
                             justifyContent: 'center',
                             color: '#FFF',
                             fontSize: '11px',
-                            fontWeight: 800
+                            fontWeight: 800,
+                            position: 'relative',
+                            overflow: 'hidden',
+                            boxShadow: 'var(--shadow-xs)'
                           }}>
-                            {book.title.substring(0, 2).toUpperCase()}
+                            {(book.coverImage || book.imageUrl) ? (
+                              <img 
+                                src={book.coverImage || book.imageUrl} 
+                                alt={book.title} 
+                                style={{ width: '100%', height: '100%', objectFit: 'cover' }} 
+                              />
+                            ) : (
+                              book.title.substring(0, 2).toUpperCase()
+                            )}
                           </div>
                         </td>
                         <td>
