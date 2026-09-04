@@ -8,6 +8,7 @@ import LibraryView from './components/LibraryView';
 import OrdersView from './components/OrdersView';
 import InsightsView from './components/InsightsView';
 import { AboutView, FaqView, ContactView, Footer } from './components/InfoPages';
+import { TermsView, PrivacyView, RefundPolicyView, ShippingPolicyView } from './components/PolicyPages';
 import CartDrawer from './components/CartDrawer';
 import CheckoutModal from './components/CheckoutModal';
 import ReaderModal from './components/ReaderModal';
@@ -44,6 +45,10 @@ export default function App() {
         {activeView === 'about' && <AboutView />}
         {activeView === 'faq' && <FaqView />}
         {activeView === 'contact' && <ContactView />}
+        {activeView === 'terms' && <TermsView />}
+        {activeView === 'privacy' && <PrivacyView />}
+        {activeView === 'refund-policy' && <RefundPolicyView />}
+        {activeView === 'shipping-policy' && <ShippingPolicyView />}
         {activeView === 'admin' && <AdminDashboard />}
       </main>
 

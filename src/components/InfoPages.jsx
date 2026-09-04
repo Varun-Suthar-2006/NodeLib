@@ -270,45 +270,64 @@ export function Footer() {
             <ul className="footer-nav-list">
               <li><button onClick={() => navigateTo('about')}>About NodeLib</button></li>
               <li><button onClick={() => navigateTo('faq')}>Frequently Asked Questions</button></li>
-              <li><button onClick={() => navigateTo('contact')}>Editorial & Manuscripts</button></li>
+              <li><button onClick={() => navigateTo('contact')}>Editorial &amp; Manuscripts</button></li>
               <li><button onClick={() => navigateTo('contact')}>Developer Support</button></li>
             </ul>
           </div>
 
-          {/* Column 4: Trust & Infrastructure */}
+          {/* Column 4: Legal & Merchant Policies */}
           <div className="footer-links-col">
-            <h5 className="footer-col-title">Enterprise</h5>
-            <div style={{ display: 'grid', gap: '8px', fontSize: '12.5px', color: 'var(--text-muted)' }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-                <ShieldCheck size={14} style={{ color: 'var(--emerald-text)' }} /> 256-Bit TLS Checkout
-              </div>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-                <CheckCircle2 size={14} style={{ color: 'var(--emerald-text)' }} /> Supabase Cloud Verified
-              </div>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-                <Sparkles size={14} style={{ color: 'var(--primary)' }} /> DRM-Free Ownership
-              </div>
-              <button 
-                onClick={() => navigateTo('admin')} 
-                style={{
-                  marginTop: '6px',
-                  color: 'var(--rose)',
-                  background: 'var(--rose-bg)',
-                  padding: '4px 10px',
-                  borderRadius: 'var(--radius-xs)',
-                  fontSize: '11.5px',
-                  fontWeight: 800,
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  gap: '5px',
-                  width: 'fit-content'
-                }}
-                title="Restricted Staff Login"
-              >
-                <Shield size={12} /> Staff Management Portal
-              </button>
-            </div>
+            <h5 className="footer-col-title">Legal &amp; Trust</h5>
+            <ul className="footer-nav-list">
+              <li><button onClick={() => navigateTo('terms')}>Terms of Service</button></li>
+              <li><button onClick={() => navigateTo('privacy')}>Privacy Policy</button></li>
+              <li><button onClick={() => navigateTo('refund-policy')}>Refund &amp; Cancellation</button></li>
+              <li><button onClick={() => navigateTo('shipping-policy')}>Instant Digital Delivery</button></li>
+            </ul>
           </div>
+        </div>
+
+        {/* Security & Trust Row */}
+        <div style={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+          padding: '16px 0',
+          borderBottom: '1px solid var(--border)',
+          flexWrap: 'wrap',
+          gap: '12px',
+          fontSize: '12px',
+          color: 'var(--text-muted)'
+        }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '16px', flexWrap: 'wrap' }}>
+            <span style={{ display: 'flex', alignItems: 'center', gap: '5px' }}>
+              <ShieldCheck size={14} style={{ color: 'var(--emerald-text)' }} /> 256-Bit TLS Secured
+            </span>
+            <span style={{ display: 'flex', alignItems: 'center', gap: '5px' }}>
+              <CheckCircle2 size={14} style={{ color: 'var(--emerald-text)' }} /> Razorpay Verified Gateway
+            </span>
+            <span style={{ display: 'flex', alignItems: 'center', gap: '5px' }}>
+              <Sparkles size={14} style={{ color: 'var(--primary)' }} /> 100% DRM-Free Ownership
+            </span>
+          </div>
+
+          <button 
+            onClick={() => navigateTo('admin')} 
+            style={{
+              color: 'var(--rose)',
+              background: 'var(--rose-bg)',
+              padding: '3px 8px',
+              borderRadius: 'var(--radius-xs)',
+              fontSize: '11px',
+              fontWeight: 800,
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '4px'
+            }}
+            title="Restricted Staff Login"
+          >
+            <Shield size={12} /> Staff Portal
+          </button>
         </div>
 
         {/* Bottom Bar: Copyright & Professional Brand Seal */}

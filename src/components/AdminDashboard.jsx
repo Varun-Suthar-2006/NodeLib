@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { useApp } from '../context/AppContext';
 import { dbService } from '../services/dbService';
+import { getRazorpayKeyId, setRazorpayKeyId } from '../services/razorpayService';
 import { 
   Shield, KeyRound, ArrowLeft, Plus, Edit2, 
   Trash2, RefreshCw, Database, DollarSign, 
   ShoppingBag, Users, BookOpen, AlertTriangle,
   CheckCircle, ArrowUpRight, BarChart2, Eye,
-  CreditCard, Smartphone, QrCode, Percent, ArrowDownRight
+  CreditCard, Smartphone, QrCode, Percent, ArrowDownRight,
+  Settings, Lock, Save, ExternalLink, HelpCircle
 } from 'lucide-react';
 
 export default function AdminDashboard() {
@@ -20,8 +22,16 @@ export default function AdminDashboard() {
   } = useApp();
 
   const [passcode, setPasscode] = useState('');
-  const [activeTab, setActiveTab] = useState('overview'); // 'overview' | 'payments' | 'catalog' | 'orders' | 'database'
+  const [activeTab, setActiveTab] = useState('overview'); // 'overview' | 'payments' | 'catalog' | 'orders' | 'database' | 'settings'
   const [paymentsList, setPaymentsList] = useState([]);
+  const [customRzpKey, setCustomRzpKey] = useState(() => getRazorpayKeyId());
+
+  // Save custom Razorpay Key
+  const handleSaveRzpKey = (e) => {
+    e.preventDefault();
+    setRazorpayKeyId(customRzpKey);
+    showToast('Razorpay Gateway Key updated successfully!', 'success');
+  };
 
   // Fetch Payments Analytics from Supabase
   useEffect(() => {
@@ -182,6 +192,13 @@ export default function AdminDashboard() {
               onClick={() => setActiveTab('database')}
             >
               <Database size={14} /> Supabase PostgreSQL
+            </button>
+            <button
+              className={`btn btn-sm ${activeTab === 'settings' ? 'btn-primary' : 'btn-ghost'}`}
+              style={{ flexShrink: 0 }}
+              onClick={() => setActiveTab('settings')}
+            >
+              <Settings size={14} /> Gateway &amp; Business Settings
             </button>
           </div>
 
@@ -669,6 +686,140 @@ export default function AdminDashboard() {
                 >
                   <Database size={15} /> Configure Supabase Connection Keys
                 </button>
+              </div>
+            </div>
+          )}
+
+          {/* ========================================================= */}
+          {/* TAB 6: GATEWAY & BUSINESS SETTINGS */}
+          {/* ========================================================= */}
+          {activeTab === 'settings' && (
+            <div className="animate-fade-up" style={{ display: 'grid', gap: '24px' }}>
+              
+              {/* Razorpay Gateway API Configuration */}
+              <div style={{
+                background: 'var(--surface)',
+                border: '1px solid var(--border)',
+                borderRadius: 'var(--radius-xl)',
+                padding: '28px',
+                boxShadow: 'var(--shadow-xs)'
+              }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '16px' }}>
+                  <div style={{
+                    width: '36px',
+                    height: '36px',
+                    borderRadius: 'var(--radius-md)',
+                    background: 'var(--primary-light)',
+                    color: 'var(--primary)',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center'
+                  }}>
+                    <CreditCard size={18} />
+                  </div>
+                  <div>
+                    <h3 style={{ fontSize: '18px', fontWeight: 800 }}>
+                      Razorpay Gateway &amp; Merchant Settings
+                    </h3>
+                    <p style={{ fontSize: '12.5px', color: 'var(--text-muted)' }}>
+                      Configure your production or test Razorpay API Key for live customer transactions.
+                    </p>
+                  </div>
+                </div>
+
+                <form onSubmit={handleSaveRzpKey} style={{ display: 'grid', gap: '16px', maxWidth: '640px' }}>
+                  <div>
+                    <label style={{ display: 'block', fontSize: '13px', fontWeight: 700, marginBottom: '6px' }}>
+                      Razorpay Key ID (rzp_live_... or rzp_test_...)
+                    </label>
+                    <div style={{ display: 'flex', gap: '8px' }}>
+                      <input
+                        type="text"
+                        value={customRzpKey}
+                        onChange={(e) => setCustomRzpKey(e.target.value)}
+                        placeholder="rzp_test_... or rzp_live_..."
+                        style={{
+                          flex: 1,
+                          padding: '10px 14px',
+                          borderRadius: 'var(--radius-md)',
+                          border: '1px solid var(--border)',
+                          background: 'var(--surface-subtle)',
+                          fontFamily: 'var(--font-mono)',
+                          fontSize: '13.5px'
+                        }}
+                      />
+                      <button type="submit" className="btn btn-primary" style={{ gap: '6px' }}>
+                        <Save size={14} /> Save Key
+                      </button>
+                    </div>
+                  </div>
+
+                  <div style={{
+                    background: 'var(--surface-subtle)',
+                    padding: '14px 16px',
+                    borderRadius: 'var(--radius-md)',
+                    border: '1px dashed var(--border)',
+                    fontSize: '12.5px',
+                    color: 'var(--text-secondary)',
+                    lineHeight: 1.6
+                  }}>
+                    <strong>💡 How to get your Live API Key:</strong><br />
+                    1. Log in to your <a href="https://dashboard.razorpay.com/app/keys" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--primary)', fontWeight: 700, textDecoration: 'underline' }}>Razorpay Dashboard → Settings → API Keys ↗</a><br />
+                    2. Click <strong>Generate Live Key</strong> or <strong>Generate Test Key</strong>.<br />
+                    3. Copy the <strong>Key ID</strong> and paste it above, or add it to your <code>.env</code> file as <code>VITE_RAZORPAY_KEY_ID</code>.
+                  </div>
+                </form>
+              </div>
+
+              {/* Startup E-Commerce Compliance & GST Config */}
+              <div style={{
+                background: 'var(--surface)',
+                border: '1px solid var(--border)',
+                borderRadius: 'var(--radius-xl)',
+                padding: '28px',
+                boxShadow: 'var(--shadow-xs)'
+              }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '16px' }}>
+                  <div style={{
+                    width: '36px',
+                    height: '36px',
+                    borderRadius: 'var(--radius-md)',
+                    background: 'var(--emerald-bg)',
+                    color: 'var(--emerald-text)',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center'
+                  }}>
+                    <ShieldCheck size={18} />
+                  </div>
+                  <div>
+                    <h3 style={{ fontSize: '18px', fontWeight: 800 }}>
+                      E-Commerce Tax &amp; Compliance Details
+                    </h3>
+                    <p style={{ fontSize: '12.5px', color: 'var(--text-muted)' }}>
+                      Configured for Indian Goods and Services Tax (GST) &amp; Payment Gateway Verification.
+                    </p>
+                  </div>
+                </div>
+
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '14px', fontSize: '13px' }}>
+                  <div style={{ background: 'var(--surface-subtle)', padding: '14px', borderRadius: 'var(--radius-md)', border: '1px solid var(--border)' }}>
+                    <span style={{ color: 'var(--text-muted)', display: 'block', fontSize: '11.5px', fontWeight: 700, textTransform: 'uppercase' }}>Registered Legal Entity</span>
+                    <strong style={{ fontSize: '14px', marginTop: '2px', display: 'block' }}>Lotus &amp; Lithium Technologies Pvt. Ltd.</strong>
+                  </div>
+                  <div style={{ background: 'var(--surface-subtle)', padding: '14px', borderRadius: 'var(--radius-md)', border: '1px solid var(--border)' }}>
+                    <span style={{ color: 'var(--text-muted)', display: 'block', fontSize: '11.5px', fontWeight: 700, textTransform: 'uppercase' }}>Digital Goods SAC Code</span>
+                    <strong style={{ fontSize: '14px', marginTop: '2px', display: 'block', fontFamily: 'var(--font-mono)' }}>4901 (E-Books &amp; Technical Manuals)</strong>
+                  </div>
+                  <div style={{ background: 'var(--surface-subtle)', padding: '14px', borderRadius: 'var(--radius-md)', border: '1px solid var(--border)' }}>
+                    <span style={{ color: 'var(--text-muted)', display: 'block', fontSize: '11.5px', fontWeight: 700, textTransform: 'uppercase' }}>GST Tax Rate</span>
+                    <strong style={{ fontSize: '14px', marginTop: '2px', display: 'block', color: 'var(--emerald-text)' }}>18% Standard GST (Included in Price)</strong>
+                  </div>
+                  <div style={{ background: 'var(--surface-subtle)', padding: '14px', borderRadius: 'var(--radius-md)', border: '1px solid var(--border)' }}>
+                    <span style={{ color: 'var(--text-muted)', display: 'block', fontSize: '11.5px', fontWeight: 700, textTransform: 'uppercase' }}>Delivery SLA</span>
+                    <strong style={{ fontSize: '14px', marginTop: '2px', display: 'block', color: 'var(--primary)' }}>0-Sec Automated Instant Digital Delivery</strong>
+                  </div>
+                </div>
               </div>
             </div>
           )}

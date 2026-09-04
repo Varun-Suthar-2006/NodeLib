@@ -2151,3 +2151,36 @@ header.scrolled {
   .smart-stat-card strong { font-size: 16px; }
   .solar-hero-container { max-width: 220px; }
 }
+
+/* ==========================================================================
+   PRINT & GST INVOICE STYLING
+   ========================================================================== */
+.invoice-modal-overlay {
+  z-index: 300;
+}
+.invoice-modal-content {
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.4);
+}
+
+@media print {
+  body * {
+    visibility: hidden;
+  }
+  .invoice-paper, .invoice-paper * {
+    visibility: visible;
+  }
+  .invoice-paper {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    padding: 0 !important;
+    margin: 0 !important;
+    background: #FFFFFF !important;
+    color: #000000 !important;
+  }
+  .no-print, header, footer, .modal-overlay, .modal-close-btn, .btn {
+    display: none !important;
+  }
+}
+
